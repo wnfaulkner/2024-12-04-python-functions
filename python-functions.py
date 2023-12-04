@@ -98,7 +98,11 @@ print(f'largest([0,1])={largest([0,1])}, largest([1,2,3])={largest([1,2,3])}, la
   # occurrences('fleep floop', 'ee')  # returns 1
   # occurrences('fleep floop', 'fe')  # returns 0
 
+def occurrences(string_to_serach, pattern):
+  return(string_to_serach.count(pattern))
 
+print('Challenge 3:')
+print(f"occurrences('fleep floop', 'e')= {occurrences('fleep floop', 'e')}, occurrences('fleep floop', 'ex')= {occurrences('fleep floop', 'ex')}.")
 
 
 # 4. Write a function named product that takes an arbitrary number of numbers, multiplies them all together, and returns the product.
@@ -106,6 +110,18 @@ print(f'largest([0,1])={largest([0,1])}, largest([1,2,3])={largest([1,2,3])}, la
   # product(2, 5, 5) # returns 50
   # product(4, 0.5, 5) # returns 10.0
 
+from functools import reduce
+
+def product(*args):
+  nums_to_multiply = list(args)
+  result_a = 1
+  for arg in args:
+    result_a *= arg
+  result_b = reduce(lambda x, y: x*y, nums_to_multiply)
+  return(result_a)
+
+print('Challenge 4: ')
+print(product(1,2), product(0,24), product(3,4,5), product(1,2,3,4,5))
 
 # BONUS Write a function named steps_to_zero that accepts a non-negative integer as an argument, and returns the number of steps it took to reduce the integer to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
   # steps_to_zero(14) # returns 6
@@ -115,4 +131,23 @@ print(f'largest([0,1])={largest([0,1])}, largest([1,2,3])={largest([1,2,3])}, la
   # Step 4) 3 is odd; subtract 1 and obtain 2. 
   # Step 5) 2 is even; divide by 2 and obtain 1. 
   # Step 6) 1 is odd; subtract 1 and obtain 0.
+
+def steps_to_zero(positive_integer):
+  if positive_integer <= 0:
+    return('Error: Only positive integers accepted as inputs. Please try again.')
+  
+  result = positive_integer
+  idx = 0
+  while result != 0:
+    idx += 1
+    if result % 2 > 0:
+      result -= 1
+    else:
+      result /= 2
+    # print(idx, result)
+  return(idx)
+
+print('Bonus Challenge: ')
+print(steps_to_zero(14))
+
 
